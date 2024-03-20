@@ -1,0 +1,70 @@
+body{
+    background-color: rgb(51, 2, 63);
+    color: #fff;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#juego{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 340px;
+    width: 340px;
+    
+  overflow: hidden;
+  z-index: 101;
+  background-image: url(/src/fondo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#tabla{
+    height: 340px;
+    width: 340px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2px;
+    z-index: 100;
+}
+
+.cuadro{
+    background-color: rgba(255, 0, 0, 0);
+    cursor: pointer;
+  }
+#x{
+  background-image: url(/src/x.png);
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: 22px 15px;
+  animation: aparecer 0.1s ease-in-out;
+}
+
+#o{
+  background-image: url(/src/o.png);
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: 20px 15px;
+  animation: aparecer 0.1s ease-in-out;
+}
+
+@keyframes aparecer {
+  0%{scale: 0.1;}
+  50%{scale: 0.4;}
+  100%{scale: 1;}
+  
+}
+
+.head{
+  height: 60px;
+  width: 200px;
+  text-align: center;
+  font-size: large;
+  padding: 10px;
+  color: rgb(255, 102, 230);
+}
