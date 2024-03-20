@@ -1,5 +1,11 @@
 //funcion de ganar
 let info= document.getElementById('info')
+
+document.getElementById('btn').addEventListener('click',()=>{
+     location.reload()
+})
+
+
 function win(intento) {
     let combinaciones = [
         [1, 2, 3],
@@ -49,6 +55,7 @@ let tabla =
 
 let jcolor= {1:'x',2:'o'}
 
+function btnmostrar(){document.getElementById('btn').style.display='block'}
 
 function color(a){
     
@@ -65,16 +72,19 @@ positions[turn-1].push((a+1))
 if(positions[0].length>=3||positions[1].length>=3)
 {  
     if(win(positions[0])){
+        btnmostrar();
         info.innerText='X GANA!'
         ;sigue=false}
 
     else if(win(positions[1]))
-    {info.innerText='O GANA!';
+    {  btnmostrar();
+        info.innerText='O GANA!';
     sigue=false}
 
 
     else if(rounds==9)
-    {info.innerText='EMPATE'
+    {  btnmostrar();
+        info.innerText='EMPATE'
     ;sigue=false}
 }
 
