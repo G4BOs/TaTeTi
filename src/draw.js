@@ -1,3 +1,5 @@
+const pop = new Audio('src/pop1.mp3');
+
 
 //-----------------------Mostrar Resultado--------------------------------
 let resultado= document.getElementById('info')
@@ -68,11 +70,15 @@ let posicionDeJugadores =
     {'9':0},
 ]
 
+
 //--------------------------------------Dibujar tabla----------------------------------
 function dibujar(a){
 
 //====Verificar si sigue el juego=
 if (posicionDeJugadores[a][a+1]==0&&siguePartida==true){
+
+//Reproducir sonido
+pop.play()
 
 //Asignar posicion de click del jugador
 posicionDeJugadores[a][(a+1)]=turno;
