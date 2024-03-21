@@ -5,7 +5,6 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -15,12 +14,11 @@ body{
     align-items: center;
     height: 340px;
     width: 340px;
-    
-  overflow: hidden;
   z-index: 101;
   background-image: url(/src/fondo.png);
-  background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
+
 }
 
 #tabla{
@@ -35,44 +33,51 @@ body{
 
 .cuadro{
     background-color: rgba(255, 0, 0, 0);
-    cursor: pointer;
+  }
+  .cuadro:active{
+    background-color: #ffffff00;
   }
 #x{
   background-image: url(/src/x.png);
-  background-size: 80px;
+  background-size: 70px;
   background-repeat: no-repeat;
-  background-position: 22px 15px;
+  background-position: 26px 22px;
   animation: aparecer 0.1s ease-in-out;
 }
 
 #o{
   background-image: url(/src/o.png);
-  background-size: 80px;
+  background-size: 70px;
   background-repeat: no-repeat;
-  background-position: 20px 15px;
+  background-position: 26px 22px;
   animation: aparecer 0.1s ease-in-out;
 }
 
 @keyframes aparecer {
-  0%{scale: 0.1;}
-  50%{scale: 0.4;}
-  100%{scale: 1;}
-  
+  0% {
+    scale: 0.1;
+  }
+  100% {
+    scale: 1;
+  }
 }
 
+
 .head{
-  height: 60px;
+  height: 50px;
+  display: flex;
   width: 200px;
   text-align: center;
   font-size: large;
-  padding: 10px;
+  padding: 1px;
   color: rgb(255, 102, 230);
+  justify-content: center;
 }
 
 .retry{
   height: 90px;
   width: 90px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 #btn{
   height: 100%;
@@ -85,7 +90,6 @@ body{
   background-repeat: no-repeat;
   background-position: 8px 8px;
   animation: aparecer 0.1s ease-in-out;
-  cursor: pointer;
   display: none;
   
 }
@@ -95,4 +99,5 @@ body{
 
 #info{
   animation: aparecer 0.1s ease-in-out;
+  transform: translateY(-16px);
 }

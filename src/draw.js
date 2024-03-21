@@ -1,13 +1,20 @@
-//funcion de ganar
-let info= document.getElementById('info')
 
+//-----------------------Mostrar Resultado--------------------------------
+let resultado= document.getElementById('info')
+
+
+//----------------------Recargar Pagina-----------------------------------
 document.getElementById('btn').addEventListener('click',()=>{
      location.reload()
 })
+//------------Boton de recargar Pagina------------------------------------------
+function btnmostrar(){document.getElementById('btn').style.display='block'}
 
 
+
+//----------------Funcion que analiza victoria
 function win(intento) {
-    let combinaciones = [
+    let combinacionesGanadoras = [
         [1, 2, 3],
         [4, 5, 6],
         [7, 8, 9],
@@ -18,13 +25,9 @@ function win(intento) {
         [3, 5, 7]
     ];
 
-    // Convertir las posiciones del jugador en un array
-    console.log('Intento:'+intento)
-    
-
-    // Verificar si alguna combinación ganadora coincide con las posiciones del jugador
-    for (let i = 0; i < combinaciones.length; i++) {
-        let combinacionGanadora = combinaciones[i];
+    // ----Verificar si alguna combinación ganadora coincide con las posiciones del jugador
+    for (let i = 0; i < combinacionesGanadoras.length; i++) {
+        let combinacionGanadora = combinacionesGanadoras[i];
         if (combinacionGanadora.every(pos => intento.includes(pos))) {
             return true;
         }
@@ -35,12 +38,24 @@ function win(intento) {
 
 
 //Comprobar si se termina
-let sigue =true
+let siguePartida =true
 
-let turn=1;
-let rounds=0
+//-----------------------------------------------Sistema de turnos----------------------------------
+
+//Rondas jugadas
+let rondasJugadas=0
+
+//Turnos
+let turno=1;
+
+//Valores de los jugadores
+let player= {1:'x',2:'o'}
+
+//Seguimiento de posiciones de jugadores
 let positions=[[],[]]
-let tabla =
+
+//Valores de las pocisiones del jugador
+let posicionDeJugadores =
 [
     {'1':0},
     {'2':0},
@@ -53,57 +68,70 @@ let tabla =
     {'9':0},
 ]
 
-let jcolor= {1:'x',2:'o'}
+//--------------------------------------Dibujar tabla----------------------------------
+function dibujar(a){
 
-function btnmostrar(){document.getElementById('btn').style.display='block'}
+//====Verificar si sigue el juego=
+if (posicionDeJugadores[a][a+1]==0&&siguePartida==true){
 
-function color(a){
-    
-    //console.log( a,'Funciona')
+//Asignar posicion de click del jugador
+posicionDeJugadores[a][(a+1)]=turno;
 
-if (tabla[a][a+1]==0&&sigue==true){
-    tabla[a][(a+1)]=turn
-if(turn===1){turn=2;rounds++}
-else{turn=1;rounds++}
-    
-document.getElementById(`${a}`).id=jcolor[turn]
-positions[turn-1].push((a+1))
+//Intercalar turnos
+if(turno===1){turno=2;rondasJugadas++}
+else{turno=1;
 
+    //Aumentar numero de rondas jugadas
+    rondasJugadas++}
+
+//Registrar las posiciones de jugadores en un array
+document.getElementById(`${a}`).id=player[turno]
+positions[turno-1].push((a+1))
+
+//Comprobar victoria
 if(positions[0].length>=3||positions[1].length>=3)
 {  
+
+    //Si gana jugador X
     if(win(positions[0])){
         btnmostrar();
-        info.innerText='X GANA!'
-        ;sigue=false}
+        resultado.innerText='X GANA!'
+        //Cambiar valor de si sigue la partida
+        ;siguePartida=false}
 
-    else if(win(positions[1]))
+
+        //Si Gana jugador O
+        else if(win(positions[1]))
     {  btnmostrar();
-        info.innerText='O GANA!';
-    sigue=false}
+        resultado.innerText='O GANA!';
+    siguePartida=false}
 
 
-    else if(rounds==9)
+    //Empate
+    else if(rondasJugadas==9)
     {  btnmostrar();
-        info.innerText='EMPATE'
-    ;sigue=false}
+        resultado.innerText='EMPATE'
+    ;siguePartida=false}
+}
+}
 }
 
+//-----------------Dibujar cuadricula de posiciones---------------
 
-}
-
-}
-
+//Ventana de juego
 let table = document.getElementById('tabla');
 
-function draw(){
+//Dibujar cuadros jugables
+function dibujarCuadros(){
 
-for(let i=0;i<tabla.length;i++)
+for(let i=0;i<posicionDeJugadores.length;i++)
 {
+    //Crear divs con id unico 
     let cuadro = document.createElement('div');
     cuadro.classList.add('cuadro');
     cuadro.id = i;
-    cuadro.addEventListener('click',function(){color(i)})
+    cuadro.addEventListener('click',function(){dibujar(i)})
     table.appendChild(cuadro);
 }
 }
-draw()
+dibujarCuadros()
